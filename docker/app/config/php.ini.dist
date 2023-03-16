@@ -1,0 +1,15 @@
+#
+# If you need to make your local environment changes to php.ini use php.ini.dist.override file
+#
+
+date.timezone=Europe/Warsaw
+
+[xdebug]
+xdebug.mode=debug,develop,profile
+xdebug.start_with_request=trigger
+xdebug.client_port=9000
+xdebug.client_host=host.docker.internal
+xdebug.output_dir=/var/www/html/application/data/log
+xdebug.profiler_output_name=xdebug_profile.%p
+xdebug.force_display_errors=1
+xdebug.force_error_reporting=1

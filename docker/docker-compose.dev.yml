@@ -1,0 +1,17 @@
+version: "3.6"
+services:
+
+  db:
+    ports:
+      - "${DB_PORT_MAP}:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+  app:
+    ports:
+      - "${APP_PORT_MAP}:80"
+    volumes:
+      - ..:/var/www/html
+
+volumes:
+  db-data:

@@ -1,0 +1,36 @@
+version: "3.6"
+services:
+
+  db:
+    build: db
+    container_name: ${COMPOSE_PROJECT_NAME}_db
+    restart: on-failure
+    command: --sql_mode="" --innodb-buffer-pool-size=2G
+    environment:
+      MYSQL_ROOT_PASSWORD: docker_root
+      MYSQL_DATABASE: onboard
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      APP_PORT_MAP: ${APP_PORT_MAP}
+      TZ: Europe/Warsaw
+
+  app:
+    container_name: ${COMPOSE_PROJECT_NAME}_app
+    build:
+      context: ..
+      dockerfile: docker/app/Dockerfile
+      target: base
+    environment:
+      DB_HOST: db
+      DB_NAME: onboard
+      DB_USER: docker
+      DB_PASS: docker
+      APPLICATION_ENV: development
+      TZ: Europe/Warsaw
+    depends_on:
+      - db
+    restart: on-failure
+    networks:
+      default:
+        aliases: 
+          - app_test
