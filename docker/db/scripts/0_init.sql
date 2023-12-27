@@ -2,11 +2,11 @@ GRANT ALL PRIVILEGES ON *.* TO 'docker';
 
 CREATE TABLE IF NOT EXISTS `investment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `investment` (`id`, `name`, `city`, `address`) VALUES
 	(1, 'Zielony Staw', 'Kraków', 'Krowoderska 36'),
@@ -17,9 +17,9 @@ INSERT INTO `investment` (`id`, `name`, `city`, `address`) VALUES
 
 CREATE TABLE IF NOT EXISTS `realestate_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
 INSERT INTO `realestate_status` (`id`, `name`) VALUES
 	(1, 'Dostępne'),
@@ -28,9 +28,9 @@ INSERT INTO `realestate_status` (`id`, `name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `realestate_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `realestate_type` (`id`, `name`) VALUES
 	(1, 'Mieszkanie'),
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `realestate` (
   `investment_id` int(11) DEFAULT NULL,
   `type_id` int(11) DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
-  `number` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `number` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `area` double DEFAULT NULL,
   `price` double DEFAULT NULL,
   `mkw_price` double DEFAULT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `realestate` (
   CONSTRAINT `investment` FOREIGN KEY (`investment_id`) REFERENCES `investment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `status` FOREIGN KEY (`status_id`) REFERENCES `realestate_status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `type` FOREIGN KEY (`type_id`) REFERENCES `realestate_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=302 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=302 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `realestate` (`id`, `investment_id`, `type_id`, `status_id`, `number`, `area`, `price`, `mkw_price`) VALUES
 	(1, 1, 4, 1, '00', 33.81, 218000, 6447.8),
