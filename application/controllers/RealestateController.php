@@ -2,7 +2,6 @@
 
 class RealestateController extends Zend_Controller_Action
 {
-
     public function editAction()
     {
         $realestateId = $this->getParam('id');
@@ -30,7 +29,10 @@ class RealestateController extends Zend_Controller_Action
             )
             ->addElement('submit', 'save', array('label' => 'Zapisz'));
 
-        if ($this->getRequest()->isPost() && $form->isValid($this->getAllParams())) {
+        if (
+            $this->getRequest()->isPost()
+            && $form->isValid($this->getAllParams())
+        ) {
             (new Zend_Db_Table('realestate'))->update(
                 [
                     'price' => $form->getValue('price')

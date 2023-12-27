@@ -4,7 +4,6 @@ $this->headTitle('Inwestycja - ' . $this->investment->name);
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Lista lokali w inwestycji: <?= $this->investment->name ?></h1>
 </div>
-
 <div style="width:auto;">
     <div class="row">
         <div class="col">
@@ -30,7 +29,6 @@ $this->headTitle('Inwestycja - ' . $this->investment->name);
                         </tr>
                     </thead>
                     <tbody>
-
                         <?php foreach ($this->realestates as $realestate) : ?>
                             <tr>
                                 <td>
@@ -50,13 +48,9 @@ $this->headTitle('Inwestycja - ' . $this->investment->name);
                                 </td>
                             </tr>
                         <?php endforeach; ?>
-
-
-
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 </div>
