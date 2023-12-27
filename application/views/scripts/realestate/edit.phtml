@@ -8,6 +8,17 @@ $this->headTitle('Edycja lokalu');
     <form action="<?= $this->form->getAction(); ?>" method="post">
         <div class="mb-3">
             <label class="form-label">
+                <?= $this->form->status_id->getLabel() ?>
+                <span class="text-danger fw-bold">*</span>
+            </label>
+            <?= $this->form->status_id->removeDecorator('label')->setAttribs(
+                [
+                    'class' => 'form-control'
+                ]
+            ) ?>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">
                 <?= $this->form->price->getLabel() ?>
                 <span class="text-danger fw-bold">*</span>
             </label>

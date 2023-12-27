@@ -18,6 +18,24 @@ class RealestateController extends Zend_Controller_Action
         $form
             ->addElement(
                 (
+                    new Zend_Form_Element_Select(
+                        'status_id',
+                        [
+                            'label' => 'Status'
+                        ]
+                    )
+                )
+                    ->setRequired(true)
+                    ->addMultiOptions(
+                        [
+                            '1' => 'Dostępne',
+                            '2' => 'Rezerwacja',
+                            '3' => 'Sprzedane'
+                        ]
+                    )
+            )
+            ->addElement(
+                (
                     new Zend_Form_Element_Text(
                         'price',
                         [
@@ -35,6 +53,7 @@ class RealestateController extends Zend_Controller_Action
         ) {
             (new Zend_Db_Table('realestate'))->update(
                 [
+                    'status_id' => $form->getValue('status_id'),
                     'price' => $form->getValue('price')
                 ],
                 [
@@ -46,6 +65,7 @@ class RealestateController extends Zend_Controller_Action
             $this->redirect('/investment/details/id/' . $this->view->realestate->investment_id);
         } else {
             $form->populate([
+                'status_id' => $this->view->realestate->status_id,
                 'price' => $this->view->realestate->price
             ]);
         }

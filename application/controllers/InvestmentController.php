@@ -32,8 +32,13 @@ class InvestmentController extends Zend_Controller_Action
 
         $this->view->investment = (new Zend_Db_Table('investment'))->find($investmentId)[0];
 
-        $this->view->realestates = (new Zend_Db_Table('realestate'))->fetchAll([
-            'investment_id = ?' => $investmentId
-        ]);
+        $this->view->realestates = (new Zend_Db_Table('realestate'))->fetchAll(
+            (new Zend_Db_Table('realestate'))->select()->setIntegrityCheck(false)
+                ->from(['r' => 'realestate'], ['*'])
+                ->joinLeft(['rs' => 'realestate_status'], 'rs.id = r.status_id', [
+                    'status_name' => 'rs.name'
+                ])
+                ->where('r.investment_id = ?', $investmentId)
+        );
     }
 }

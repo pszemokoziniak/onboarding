@@ -5,14 +5,12 @@ Wymagane technologie:
 - Zend Framework 1 w wersji dostosowanej do PHP 8.1 (https://github.com/Shardj/zf1-future)
 - Bootstrap 5 (https://getbootstrap.com/)
 
-Zadanie:
+Zadanie v1:
 Na podstawie załączonej bazy danych stwórz raport historii cen lokalu.
 
-Wszystkie zapytania wykonane w ramach realizacji zadania należy przesłać w jednym pliku.
+Wszystkie zapytania modyfikujące, wykonane w ramach realizacji zadania należy przesłać w jednym pliku.
 
 ------
-
-
 
 Podczas wykonywania zadania można dodawać nowe tabele, triggery oraz widoki, jednak obecnych nie można modyfikować.
 
@@ -39,3 +37,28 @@ Zadania do realizacji:
 	Status - pole wielokrotnego wyboru do filtrowania wyników po wybranych aktualnych statusach lokali
 	Typ lokalu - pole wielokrotnego wyboru do filtrowania wyników po wybranych typach lokali
 	Data zmiany ceny od i do - dwa pola do wybrania zakresu dat od i do aby pokazać wyniki tylko z tego okresu.
+
+
+Zadanie v2:
+Na podstawie załączonej bazy danych stwórz raport statusów lokali, który zliczy lokale posiadające ten sam status i wyświetli ich liczbę wraz z listą lokali.
+
+------
+
+Zadania do realizacji:
+
+1. Stworzenie nowej zakładki w menu oraz nowego kontrolera
+2. Stworzenie raportu wraz z widokiem i filtrami na podstawie poniższych założeń: 
+
+	Raport powinien zawierać następujące kolumny:
+	L.p. - liczba porządkowa
+	Status - aktualny status lokalu
+	Inwestycja - nazwa inwestycji przypisanej do lokalu 
+	Typ lokalu - typ lokalu
+	Numer lokalu - numer lokalu 
+	Cena lokalu- cena katalogowa lokalu
+
+	W raporcie powinny być dostępne następujące filtry:
+	Numer lokalu - pole tekstowe po którym system będzie wyszukiwał nazwy lokalu
+	Inwestycja - pole wielokrotnego wyboru do filtrowania wyników po wybranych inwestycjach
+	Status - pole wielokrotnego wyboru do filtrowania wyników po wybranych aktualnych statusach lokali
+	Typ lokalu - pole wielokrotnego wyboru do filtrowania wyników po wybranych typach lokali

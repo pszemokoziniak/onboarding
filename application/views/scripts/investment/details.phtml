@@ -15,6 +15,9 @@ $this->headTitle('Inwestycja - ' . $this->investment->name);
                                 Numer
                             </th>
                             <th style="white-space: nowrap;">
+                                Status
+                            </th>
+                            <th style="white-space: nowrap;">
                                 Cena
                             </th>
                             <th style="white-space: nowrap;">
@@ -35,6 +38,9 @@ $this->headTitle('Inwestycja - ' . $this->investment->name);
                                     <?= $realestate->number ?>
                                 </td>
                                 <td>
+                                    <?= $realestate->status_name ?>
+                                </td>
+                                <td>
                                     <?= $realestate->price ?>
                                 </td>
                                 <td>
@@ -44,7 +50,7 @@ $this->headTitle('Inwestycja - ' . $this->investment->name);
                                     <?= $realestate->mkw_price ?>
                                 </td>
                                 <td>
-                                    <a class="link-underline-light" href="/realestate/edit/id/<?= $realestate->id ?>">Edytuj cenę</a>
+                                    <a class="link-underline-light" href="/realestate/edit/id/<?= $realestate->id ?>">Edytuj</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
