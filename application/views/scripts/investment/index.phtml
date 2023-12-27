@@ -1,0 +1,74 @@
+<?php
+$this->headTitle('Lista inwestycji');
+?>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Lista inwestycji</h1>
+</div>
+
+<div style="width:auto;">
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-sm" style="padding-bottom:20px">
+                    <thead>
+                        <tr>
+                            <th style="white-space: nowrap;">
+                                Nazwa
+                            </th>
+                            <th style="white-space: nowrap;">
+                                Miejscowość
+                            </th>
+                            <th style="white-space: nowrap;">
+                                Adres
+                            </th>
+                            <th style="white-space: nowrap;">
+                                Liczba lokali
+                            </th>
+                            <th style="white-space: nowrap;">
+                                Ceny
+                            </th>
+                            <th style="white-space: nowrap;">
+                                Metraże
+                            </th>
+                            <th style="white-space: nowrap;">
+                                Akcje
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php foreach ($this->investments as $investment) : ?>
+                            <tr>
+                                <td>
+                                    <?= $investment->name ?>
+                                </td>
+                                <td>
+                                    <?= $investment->city ?>
+                                </td>
+                                <td>
+                                    <?= $investment->address ?>
+                                </td>
+                                <td>
+                                    <?= $investment->realestate_count ?>
+                                </td>
+                                <td>
+                                    <?= $investment->min_price ?> - <?= $investment->max_price ?> PLN
+                                </td>
+                                <td>
+                                    <?= $investment->min_area ?> - <?= $investment->max_area ?> m<sup>2</sup>
+                                </td>
+                                <td>
+                                    <a class="link-underline-light" href="/investment/details/id/<?= $investment->id ?>">Szczegóły</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

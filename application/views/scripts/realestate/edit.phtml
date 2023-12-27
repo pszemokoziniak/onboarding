@@ -1,0 +1,28 @@
+<?php
+$this->headTitle('Edycja lokalu');
+?>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Edycja lokalu: <?= $this->realestate->number ?></h1>
+</div>
+<div class="col-md-6">
+    <form action="<?= $this->form->getAction(); ?>" method="post">
+        <div class="mb-3">
+            <label class="form-label">
+                <?= $this->form->price->getLabel() ?>
+                <span class="text-danger fw-bold">*</span>
+            </label>
+            <?= $this->form->price->removeDecorator('label')->setAttribs(
+                [
+                    'class' => 'form-control'
+                ]
+            ) ?>
+        </div>
+        <div class="col">
+            <?= $this->form->save->setAttribs(
+                [
+                    'class' => 'btn btn-primary float-end'
+                ]
+            ) ?>
+        </div>
+    </form>
+</div>

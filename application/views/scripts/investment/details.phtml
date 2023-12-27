@@ -1,0 +1,62 @@
+<?php
+$this->headTitle('Inwestycja - ' . $this->investment->name);
+?>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Lista lokali w inwestycji: <?= $this->investment->name ?></h1>
+</div>
+
+<div style="width:auto;">
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-sm" style="padding-bottom:20px">
+                    <thead>
+                        <tr>
+                            <th style="white-space: nowrap;">
+                                Numer
+                            </th>
+                            <th style="white-space: nowrap;">
+                                Cena
+                            </th>
+                            <th style="white-space: nowrap;">
+                                Powierzchnia
+                            </th>
+                            <th style="white-space: nowrap;">
+                                Cena m<sup>2</sup>
+                            </th>
+                            <th style="white-space: nowrap;">
+                                Akcje
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php foreach ($this->realestates as $realestate) : ?>
+                            <tr>
+                                <td>
+                                    <?= $realestate->number ?>
+                                </td>
+                                <td>
+                                    <?= $realestate->price ?>
+                                </td>
+                                <td>
+                                    <?= $realestate->area ?>
+                                </td>
+                                <td>
+                                    <?= $realestate->mkw_price ?>
+                                </td>
+                                <td>
+                                    <a class="link-underline-light" href="/realestate/edit/id/<?= $realestate->id ?>">Edytuj cenę</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
