@@ -9,6 +9,7 @@ Zadanie v1:
 Na podstawie załączonej bazy danych stwórz raport historii cen lokalu.
 
 Wszystkie zapytania modyfikujące, wykonane w ramach realizacji zadania należy przesłać w jednym pliku.
+Po sklonowaniu repo i realizacji zadania, projekt należy spakować w zipa i przesłać na maila.
 
 ------
 
