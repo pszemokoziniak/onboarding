@@ -41,3 +41,34 @@
 - docker/db/scripts — skrypty inicjalizacji bazy (0_init.sql, 1_price_history.sql)
 - application — kod Zend Framework 1 (kontrolery, widoki)
 - public_html — DocumentRoot dla Apache
+
+## Testy (SQL + smoke)
+
+### Testy SQL (integracyjne)
+Uruchamiają weryfikację tabeli/widoku oraz triggera historii cen.
+
+- Polecenie:
+    - cd docker
+    - docker compose exec -T app sh -lc 'mysql -h db -P 3306 -u docker -pdocker --ssl=0 onboard < /var/www/html/docker/db/scripts/2_tests.sql'
+
+- Oczekiwane:
+    - Istnieje tabela `realestate_price_history` i widok `vw_realestate_price_history`
+    - Dwa wpisy historii dla zaktualizowanego lokalu (test podnosi i przywraca cenę)
+
+### Smoke test HTTP
+Prosty test końcowy dla głównych stron i filtrów.
+
+- Uruchomienie:
+    - ./tests/smoke.sh
+
+- Co sprawdza:
+    - Strona główna: “Lista inwestycji”
+    - Raport historii cen: “Historia cen”
+    - Raport statusów: “Raport statusów”
+    - Filtry w historii cen nie zwracają błędu 500
+
+### Uruchomienie całości (SQL + HTTP)
+Skrypt odpala testy SQL i smoke z dowolnej lokalizacji.
+
+- Polecenie:
+    - ./tests/run_all.sh
