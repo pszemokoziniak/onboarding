@@ -1,0 +1,105 @@
+<?php
+$filters = $this->filters;
+$opts    = $this->options;
+$rows    = $this->rows;
+$summary = $this->summary;
+?>
+<div class="container-fluid">
+    <h3>Raport statusów lokali</h3>
+
+    <form method="get" class="row g-2 mb-3">
+        <div class="col-sm-3">
+            <label class="form-label">Numer lokalu</label>
+            <input type="text" name="number" value="<?php echo $this->escape($filters['number']); ?>" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <label class="form-label">Inwestycja</label>
+            <select name="investment_id[]" class="form-select" multiple>
+                <?php foreach ($opts['investments'] as $name): ?>
+                    <option value="<?php echo $this->escape($name); ?>" <?php echo in_array($name, (array)$filters['investment']) ? 'selected' : ''; ?>>
+                        <?php echo $this->escape($name); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <label class="form-label">Status</label>
+            <select name="status_id[]" class="form-select" multiple>
+                <?php foreach ($opts['statuses'] as $name): ?>
+                    <option value="<?php echo $this->escape($name); ?>" <?php echo in_array($name, (array)$filters['status']) ? 'selected' : ''; ?>>
+                        <?php echo $this->escape($name); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <label class="form-label">Typ lokalu</label>
+            <select name="type_id[]" class="form-select" multiple>
+                <?php foreach ($opts['types'] as $name): ?>
+                    <option value="<?php echo $this->escape($name); ?>" <?php echo in_array($name, (array)$filters['type']) ? 'selected' : ''; ?>>
+                        <?php echo $this->escape($name); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary mt-2">Filtruj</button>
+            <a href="<?php echo $this->url(['controller' => 'status-report', 'action' => 'index'], null, true); ?>" class="btn btn-secondary mt-2">Wyczyść</a>
+        </div>
+    </form>
+
+    <h5>Podsumowanie wg statusu</h5>
+    <div class="table-responsive mb-4">
+        <table class="table table-sm table-striped">
+            <thead>
+            <tr>
+                <th>Status</th>
+                <th>Liczba lokali</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($summary as $s): ?>
+                <tr>
+                    <td><?php echo $this->escape($s->status_name); ?></td>
+                    <td><?php echo (int)$s->cnt; ?></td>
+                </tr>
+            <?php endforeach; ?>
+            <?php if (empty($summary)): ?>
+                <tr><td colspan="2" class="text-center">Brak danych</td></tr>
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <h5>Lista lokali</h5>
+    <div class="table-responsive">
+        <table class="table table-sm table-striped">
+            <thead>
+            <tr>
+                <th>L.p.</th>
+                <th>Status</th>
+                <th>Inwestycja</th>
+                <th>Typ lokalu</th>
+                <th>Numer lokalu</th>
+                <th>Cena lokalu</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $lp = 1; ?>
+            <?php foreach ($rows as $r): ?>
+                <tr>
+                    <td><?php echo (int)$lp++; ?></td>
+                    <td><?php echo $this->escape($r->status_name); ?></td>
+                    <td><?php echo $this->escape($r->investment_name); ?></td>
+                    <td><?php echo $this->escape($r->type_name); ?></td>
+                    <td><?php echo $this->escape($r->number); ?></td>
+                    <td><?php echo number_format((float)$r->price, 2, ',', ' '); ?></td>
+                </tr>
+            <?php endforeach; ?>
+            <?php if (empty($rows)): ?>
+                <tr><td colspan="6" class="text-center">Brak danych</td></tr>
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>

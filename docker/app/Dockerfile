@@ -5,10 +5,8 @@ zlib1g-dev \
 libpng-dev \
 libjpeg-dev \
 libgmp3-dev \
-libc-client-dev \
 libkrb5-dev \
 libxml2-dev \
-libmcrypt-dev \
 libmemcached-dev \
 libzip-dev \
 libcurl4-openssl-dev \
@@ -20,14 +18,13 @@ wait-for-it \
 dos2unix \
 zip \
 git \
-uuid-runtime \ 
+uuid-runtime \
 gettext \
-bsdmainutils \ 
 libssh2-1-dev \
-libmagickwand-dev
+libmagickwand-dev \
+default-mysql-client
 
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-    && docker-php-ext-configure gd --with-jpeg --with-freetype \
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype \
     && docker-php-ext-install pdo_mysql \
     mysqli \
     bcmath \
@@ -40,8 +37,6 @@ RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     zip \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug
-
-
 
 COPY docker/app/config/vhost.conf /etc/apache2/sites-available/onboard.conf
 

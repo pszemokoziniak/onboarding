@@ -29,6 +29,20 @@
                                 <div>Lista inwestycji</div>
                             </div>
                         </a>
+                        <a href="<?php echo $this->url(['controller' => 'price-history', 'action' => 'index'], null, true); ?>"
+                           class="list-group-item list-group-item-action py-2 px-2 border border-0 ripple">
+                            <div style="display:flex">
+                                <div><i class="fas fa-chart-line fa-fw me-2"></i></div>
+                                <div>Historia cen</div>
+                            </div>
+                        </a>
+                        <a href="<?php echo $this->url(['controller' => 'status-report', 'action' => 'index'], null, true); ?>"
+                           class="list-group-item list-group-item-action py-2 px-2 border border-0 ripple">
+                            <div style="display:flex">
+                                <div><i class="fas fa-list-check fa-fw me-2"></i></div>
+                                <div>Raport statusów</div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </nav>
