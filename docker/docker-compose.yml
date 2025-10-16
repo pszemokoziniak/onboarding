@@ -10,8 +10,12 @@ services:
       MYSQL_DATABASE: onboard
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
-      APP_PORT_MAP: ${APP_PORT_MAP}
       TZ: Europe/Warsaw
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./db/scripts:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "${DB_PORT_MAP}:3306"
 
   app:
     container_name: ${COMPOSE_PROJECT_NAME}_app
@@ -31,5 +35,8 @@ services:
     restart: on-failure
     networks:
       default:
-        aliases: 
+        aliases:
           - app_test
+
+volumes:
+  db-data:
