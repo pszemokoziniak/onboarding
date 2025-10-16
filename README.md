@@ -1,65 +1,43 @@
-Przewidywany czas realizacji: 3 godziny.
+# Onboarding — uruchomienie projektu
 
-Wymagane technologie:
+## Wymagania
+- Docker + Docker Compose V2
+- Wolne porty: 8075 (app), 3318 (DB)
 
-- Zend Framework 1 w wersji dostosowanej do PHP 8.1 (https://github.com/Shardj/zf1-future)
-- Bootstrap 5 (https://getbootstrap.com/)
+## Szybki start
+1. Sklonuj repozytorium:
+   - git clone git@github.com:pszemokoziniak/onboarding.git
+   - cd onboarding/docker
 
-Zadanie v1:
-Na podstawie załączonej bazy danych stwórz raport historii cen lokalu.
+2. Sprawdź plik .env (opcjonalnie zmień porty):
+   - APP_PORT_MAP=8075
+   - DB_PORT_MAP=3318
 
-Wszystkie zapytania modyfikujące, wykonane w ramach realizacji zadania należy przesłać w jednym pliku.
-Po sklonowaniu repo i realizacji zadania, projekt należy spakować w zipa i przesłać na maila.
+3. Uruchom środowisko:
+   - docker compose up -d
 
-------
+4. Aplikacja:
+   - http://localhost:8075
 
-Podczas wykonywania zadania można dodawać nowe tabele, triggery oraz widoki, jednak obecnych nie można modyfikować.
+5. Baza danych:
+   - Host (z hosta): 127.0.0.1
+   - Port: 3318
+   - Użytkownik: docker
+   - Hasło: docker
+   - Baza: onboard
 
-Zadania do realizacji:
+## Inicjalizacja bazy
+- Skrypty z katalogu docker/db/scripts są montowane do /docker-entrypoint-initdb.d i wykonują się automatycznie przy pierwszym starcie pustego wolumenu.
+- Aby wymusić ponowną inicjalizację (UWAGA: usunięcie danych):
+  - docker compose down -v
+  - docker compose up -d
 
-1. Stworzenie nowej zakładki w menu oraz nowego Controllera
-2. Stworzenie raportu wraz z widokiem i filtrami na podstawie poniższych założeń: 
+## Połączenie z DB z kontenera aplikacji
+- docker compose exec app bash
+- mysql -h db -P 3306 -u docker -pdocker --ssl=0 onboard
 
-	Raport powinien zawierać następujące kolumny:
-	L.p. - liczba porządkowa
-	Status - aktualny status lokalu
-	Data zmiany ceny - dokładna data i godzina zmiana ceny w lokalu
-	Inwestycja - nazwa inwestycji przypisanej do lokalu w którym zmieniono cenę
-	Typ lokalu - typ lokalu w którym zmieniono cenę
-	Numer lokalu - numer lokalu w którym zmieniono cenę
-	Poprzednia cena - cena katalogowa lokal przez zmianą
-	Nowa cena - cena katalogowa lokal po zmianie
-	Poprzednia cena za m2 - cena katalogowa za m2 lokalu przed zmianą
-	Nowa cena za m2 - cena katalogowa za m2 lokalu po zmianą
-
-	W raporcie powinny być dostępne następujące filtry:
-	Numer lokalu - pole tekstowe po którym system będzie wyszukiwał nazwy lokalu
-	Inwestycja - pole wielokrotnego wyboru do filtrowania wyników po wybranych inwestycjach
-	Status - pole wielokrotnego wyboru do filtrowania wyników po wybranych aktualnych statusach lokali
-	Typ lokalu - pole wielokrotnego wyboru do filtrowania wyników po wybranych typach lokali
-	Data zmiany ceny od i do - dwa pola do wybrania zakresu dat od i do aby pokazać wyniki tylko z tego okresu.
-
-
-Zadanie v2:
-Na podstawie załączonej bazy danych stwórz raport statusów lokali, który zliczy lokale posiadające ten sam status i wyświetli ich liczbę wraz z listą lokali.
-
-------
-
-Zadania do realizacji:
-
-1. Stworzenie nowej zakładki w menu oraz nowego kontrolera
-2. Stworzenie raportu wraz z widokiem i filtrami na podstawie poniższych założeń: 
-
-	Raport powinien zawierać następujące kolumny:
-	L.p. - liczba porządkowa
-	Status - aktualny status lokalu
-	Inwestycja - nazwa inwestycji przypisanej do lokalu 
-	Typ lokalu - typ lokalu
-	Numer lokalu - numer lokalu 
-	Cena lokalu- cena katalogowa lokalu
-
-	W raporcie powinny być dostępne następujące filtry:
-	Numer lokalu - pole tekstowe po którym system będzie wyszukiwał nazwy lokalu
-	Inwestycja - pole wielokrotnego wyboru do filtrowania wyników po wybranych inwestycjach
-	Status - pole wielokrotnego wyboru do filtrowania wyników po wybranych aktualnych statusach lokali
-	Typ lokalu - pole wielokrotnego wyboru do filtrowania wyników po wybranych typach lokali
+## Struktura
+- docker/app/Dockerfile — obraz aplikacji (PHP 8.1 + Apache)
+- docker/db/scripts — skrypty inicjalizacji bazy (0_init.sql, 1_price_history.sql)
+- application — kod Zend Framework 1 (kontrolery, widoki)
+- public_html — DocumentRoot dla Apache
