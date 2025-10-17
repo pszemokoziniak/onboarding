@@ -1,0 +1,37 @@
+services:
+  app1:
+    container_name: ${COMPOSE_PROJECT_NAME}_app1
+    build: { context: .., dockerfile: docker/app/Dockerfile, target: base }
+    environment:
+      APPLICATION_ENV: production
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      TZ: Europe/Warsaw
+    depends_on: [db]
+    restart: on-failure
+    ports: ["127.0.0.1:8081:80"]
+    read_only: true
+    tmpfs: ["/tmp", "/var/run"]
+    security_opt: ["no-new-privileges:true"]
+
+  app2:
+    container_name: ${COMPOSE_PROJECT_NAME}_app2
+    build: { context: .., dockerfile: docker/app/Dockerfile, target: base }
+    environment:
+      APPLICATION_ENV: production
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      TZ: Europe/Warsaw
+    depends_on: [db]
+    restart: on-failure
+    ports: ["127.0.0.1:8082:80"]
+    read_only: true
+    tmpfs: ["/tmp", "/var/run"]
+    security_opt: ["no-new-privileges:true"]
+
+  db:
+    restart: on-failure
