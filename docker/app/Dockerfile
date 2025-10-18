@@ -48,6 +48,6 @@ RUN a2dissite 000-default \
 COPY docker/app/scripts/init.sh /usr/local/bin/init.sh
 CMD ["/usr/local/bin/init.sh"]
 
-FROM base AS staging
+FROM base AS prod
 COPY . .
 CMD ["/usr/local/bin/init.sh"]

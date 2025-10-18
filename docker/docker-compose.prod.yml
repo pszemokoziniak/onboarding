@@ -1,7 +1,7 @@
 services:
   app1:
     container_name: ${COMPOSE_PROJECT_NAME}_app1
-    build: { context: .., dockerfile: docker/app/Dockerfile, target: base }
+    build: { context: .., dockerfile: docker/app/Dockerfile, target: prod }
     environment:
       APPLICATION_ENV: production
       DB_HOST: ${DB_HOST}
@@ -18,7 +18,7 @@ services:
 
   app2:
     container_name: ${COMPOSE_PROJECT_NAME}_app2
-    build: { context: .., dockerfile: docker/app/Dockerfile, target: base }
+    build: { context: .., dockerfile: docker/app/Dockerfile, target: prod }
     environment:
       APPLICATION_ENV: production
       DB_HOST: ${DB_HOST}
