@@ -1,7 +1,10 @@
 services:
   app1:
     container_name: ${COMPOSE_PROJECT_NAME}_app1
-    build: { context: .., dockerfile: docker/app/Dockerfile, target: prod }
+    build:
+      context: ..
+      dockerfile: docker/app/Dockerfile
+      target: prod
     environment:
       APPLICATION_ENV: production
       DB_HOST: ${DB_HOST}
@@ -15,10 +18,15 @@ services:
     read_only: true
     tmpfs: ["/tmp", "/var/run"]
     security_opt: ["no-new-privileges:true"]
+    mem_limit: 512m
+    cpus: "1.0"
 
   app2:
     container_name: ${COMPOSE_PROJECT_NAME}_app2
-    build: { context: .., dockerfile: docker/app/Dockerfile, target: prod }
+    build:
+      context: ..
+      dockerfile: docker/app/Dockerfile
+      target: prod
     environment:
       APPLICATION_ENV: production
       DB_HOST: ${DB_HOST}
@@ -32,6 +40,8 @@ services:
     read_only: true
     tmpfs: ["/tmp", "/var/run"]
     security_opt: ["no-new-privileges:true"]
+    mem_limit: 512m
+    cpus: "1.0"
 
   db:
     restart: on-failure
